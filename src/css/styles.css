@@ -23,9 +23,13 @@ button {
   justify-content: center;
   height: 30px;
   width: 30px;
-  margin-left: -5px;
+  margin-left: 0px;
   padding: 5px;
   border: 1px solid transparent;
+}
+button:active {
+  background-color: #e9e9e9e3;
+  box-shadow: 1px 1px 1px 1px #5a577544;
 }
 button > img {
   display: inline-flex;
