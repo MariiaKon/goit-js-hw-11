@@ -8,19 +8,18 @@ const KEY = '25393494-37d8dd7e72c61fe26f3c6ef73';
 
 const gallery = document.querySelector('.gallery');
 const searchBox = document.querySelector('#search-form');
-let imgfToFind = '';
+let imgToFind = '';
 
 searchBox.addEventListener('submit', e => {
   e.preventDefault();
-  imgfToFind = searchBox.elements.searchQuery.value;
-  async () => {
-    try {
-      const a = await fetchImages(imgfToFind);
-      console.log(a);
-    } catch (error) {
-      console.log(error);
-    }
-  };
+  imgToFind = searchBox.elements.searchQuery.value;
+  fetchImages(imgToFind)
+    .then(response => {
+      return response.json();
+    })
+    .then(imgArr => {
+      createImages(imgArr.hits);
+    });
 });
 
 function error() {
@@ -32,7 +31,6 @@ function error() {
 function createImages(info) {
   const markup = imageTpl(info);
   gallery.innerHTML = markup;
-  //   console.log(info);
 }
 
 function clearGallery() {
@@ -40,5 +38,5 @@ function clearGallery() {
 }
 async function fetchImages(keyWord) {
   const searchFilter = 'image_type=photo&orientation=horizontal&safesearch=true';
-  return fetch(`${BASE_URL}?key=${KEY}&q=${keyWord}&${searchFilter}`);
+  return await fetch(`${BASE_URL}?key=${KEY}&q=${keyWord}&${searchFilter}`);
 }
