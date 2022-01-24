@@ -49,6 +49,8 @@ button > img {
   margin-right: auto;
 }
 .photo-card {
+  outline: 1px solid red;
+  position: relative;
   border-radius: 3px;
   display: flex;
   flex-direction: column;
@@ -57,7 +59,7 @@ button > img {
     0px 1px 1px rgba(0, 0, 0, 0.2);
 }
 .info {
-  height: 60px;
+  height: 50px;
   display: flex;
   justify-content: space-around;
 }
@@ -69,4 +71,15 @@ button > img {
   font-size: 13px;
   margin-top: 5px;
   margin-bottom: 5px;
+}
+
+.photo-card a {
+  outline: 1px solid blue;
+  display: inline-block;
+  height: 240px;
+  position: relative;
+}
+.photo-card img {
+  position: absolute;
+  height: 192px;
 }
