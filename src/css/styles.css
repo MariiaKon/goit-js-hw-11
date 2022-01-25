@@ -19,13 +19,15 @@ input {
   padding: 8px;
   border: 1px solid transparent;
 }
+.box button {
+  height: 30px;
+  width: 30px;
+  margin-left: 0px;
+}
 button {
   display: flex;
   align-items: center;
   justify-content: center;
-  height: 30px;
-  width: 30px;
-  margin-left: 0px;
   padding: 5px;
   border: 1px solid transparent;
 }
@@ -42,7 +44,7 @@ button > img {
 .gallery {
   position: relative;
   top: 50px;
-  padding: 15px;
+  padding: 15px 15px 120px 15px;
   display: grid;
   max-width: calc(100vw - 30px);
   grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
@@ -51,6 +53,24 @@ button > img {
   justify-content: center;
   margin-left: auto;
   margin-right: auto;
+}
+.gallery button {
+  position: absolute;
+  bottom: 20px;
+  margin-bottom: 20px;
+  left: calc(50vw - 150px / 2);
+  right: calc(50vw - 150px / 2);
+  height: 50px;
+  width: 150px;
+  background-color: #372ba1;
+  text-transform: uppercase;
+  font-weight: 600;
+  color: white;
+}
+.gallery button:active {
+  background-color: white;
+  color: #372ba1;
+  box-shadow: 0px 0px 6px 3px #5a577544;
 }
 .photo-card {
   position: relative;
