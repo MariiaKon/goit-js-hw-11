@@ -1,11 +1,13 @@
 .box {
   display: flex;
   justify-content: center;
-  background-color: #4032b6c9;
+  background-color: #372ba1;
   height: 50px;
   width: 100vw;
   align-items: center;
   box-shadow: 0px 0px 6px 2px #5a577544;
+  position: fixed;
+  z-index: 100;
 }
 .search-form {
   display: flex;
@@ -38,9 +40,11 @@ button > img {
   height: 15px;
 }
 .gallery {
+  position: relative;
+  top: 50px;
   padding: 15px;
   display: grid;
-  max-width: 100vw;
+  max-width: calc(100vw - 30px);
   grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
   grid-auto-rows: 240px;
   grid-gap: 12px;
@@ -49,19 +53,22 @@ button > img {
   margin-right: auto;
 }
 .photo-card {
+  position: relative;
   text-decoration: none;
   color: black;
   border-radius: 3px;
   display: flex;
   flex-direction: column;
   justify-content: flex-end;
-  box-shadow: 0px 1px 3px rgba(0, 0, 0, 0.12), 0px 1px 1px rgba(0, 0, 0, 0.14),
+  box-shadow: 0px 1px 3px rgba(0, 0, 0, 0.12), 1px 1px 1px rgba(0, 0, 0, 0.14),
     0px 1px 1px rgba(0, 0, 0, 0.2);
 }
 .info {
+  background-color: white;
   height: 50px;
   display: flex;
   justify-content: space-around;
+  z-index: 2;
 }
 .info-item {
   display: flex;
@@ -73,6 +80,7 @@ button > img {
   margin-bottom: 5px;
 }
 .photo-card img {
+  position: absolute;
   height: 100%;
   width: 100%;
   object-fit: cover;
