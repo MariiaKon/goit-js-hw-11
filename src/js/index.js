@@ -3,12 +3,13 @@ import Notiflix from 'notiflix';
 import imageTpl from '../templates/imageTpl.hbs';
 import SimpleLightbox from 'simplelightbox';
 import 'simplelightbox/dist/simple-lightbox.min.css';
-import { fetchImages, resetPage } from './fetch.js';
+import { fetchImages, resetPage, page } from './fetch.js';
 
 const gallery = document.querySelector('.gallery');
 const searchBox = document.querySelector('#search-form');
 const loadMoreBtn = document.querySelector('#load-more-btn');
 let imgToFind = '';
+let totalPages = 0;
 let totalImagesPerReq = 0;
 let images = [];
 export const imageLimitPerLoad = 40;
@@ -27,18 +28,19 @@ searchBox.addEventListener('submit', e => {
   fetchImages(imgToFind)
     .then(imgArr => {
       totalImagesPerReq = imgArr.totalHits;
+      totalPages = totalImagesPerReq / imageLimitPerLoad;
       if (totalImagesPerReq === 0) {
         throw new Error();
-      } else if (totalImagesPerReq <= imageLimitPerLoad) {
-        notify(totalImagesPerReq);
+      } else if (totalPages <= 1) {
+        notifySuccsess(totalImagesPerReq);
         createGallery(imgArr.hits);
       } else {
-        notify(totalImagesPerReq);
+        notifySuccsess(totalImagesPerReq);
         createGallery(imgArr.hits);
         loadMoreBtn.classList.remove('is-hidden');
       }
       images = document.querySelectorAll('a');
-      return imgToFind, images;
+      return imgToFind, images, totalPages;
     })
     .catch(error);
 });
@@ -57,13 +59,23 @@ loadMoreBtn.addEventListener('click', () => {
   fetchImages(imgToFind)
     .then(imgArr => {
       createGallery(imgArr.hits);
+
+      if (Math.ceil(page) > Math.ceil(totalPages)) {
+        loadMoreBtn.classList.add('is-hidden');
+        notifyRunOutOfPictures();
+      }
     })
     .catch(error);
 });
 
-function notify(qty) {
+function notifySuccsess(qty) {
   const successMsg = `Hooray! We found ${qty} Images`;
   Notiflix.Notify.success(successMsg);
+}
+
+function notifyRunOutOfPictures() {
+  const infoMsg = "We're sorry, but you've reached the end of search results.";
+  Notiflix.Notify.info(infoMsg);
 }
 
 function error() {
