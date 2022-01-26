@@ -12,3 +12,9 @@ export async function fetchImages(keyWord) {
 
   return imgArray;
 }
+
+export function resetPage() {
+  if (page > 1) {
+    page = 1;
+  }
+}

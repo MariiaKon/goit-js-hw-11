@@ -3,7 +3,7 @@ import Notiflix from 'notiflix';
 import imageTpl from '../templates/imageTpl.hbs';
 import SimpleLightbox from 'simplelightbox';
 import 'simplelightbox/dist/simple-lightbox.min.css';
-import { fetchImages } from './fetch.js';
+import { fetchImages, resetPage } from './fetch.js';
 
 const gallery = document.querySelector('.gallery');
 const searchBox = document.querySelector('#search-form');
@@ -11,14 +11,15 @@ const loadMoreBtn = document.querySelector('#load-more-btn');
 let imgToFind = '';
 let totalImagesPerReq = 0;
 let images = [];
-
 export const imageLimitPerLoad = 40;
 
 searchBox.addEventListener('submit', e => {
+  loadMoreBtn.classList.add('is-hidden');
   e.preventDefault();
 
   if (images.length > 0 && imgToFind !== searchBox.elements.searchQuery.value) {
     clearGallery();
+    resetPage();
   }
 
   imgToFind = searchBox.elements.searchQuery.value;
