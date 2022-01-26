@@ -1,3 +1,6 @@
+body {
+  position: relative;
+}
 .box {
   display: flex;
   justify-content: center;
@@ -19,7 +22,7 @@ input {
   padding: 8px;
   border: 1px solid transparent;
 }
-.box button {
+.search-btn {
   height: 30px;
   width: 30px;
   margin-left: 0px;
@@ -36,7 +39,7 @@ button:active {
   background-color: #e9e9e9e3;
   box-shadow: 1px 1px 1px 1px #5a577544;
 }
-button > img {
+.search-btn > img {
   display: inline-flex;
 
   width: 15px;
@@ -45,7 +48,7 @@ button > img {
 .gallery {
   position: relative;
   top: 50px;
-  padding: 15px 15px 120px 15px;
+  padding: 15px;
   display: grid;
   max-width: calc(100vw - 30px);
   grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
@@ -54,11 +57,11 @@ button > img {
   justify-content: center;
   margin-left: auto;
   margin-right: auto;
+  margin-bottom: 150px;
 }
-.gallery button {
+.load-more-btn {
   position: absolute;
-  bottom: 20px;
-  margin-bottom: 20px;
+  bottom: -120px;
   left: calc(50vw - 90px);
   height: 50px;
   width: 150px;
@@ -67,7 +70,7 @@ button > img {
   font-weight: 600;
   color: white;
 }
-.gallery button:active {
+.load-more-btn:active {
   background-color: white;
   color: #372ba1;
   font-weight: 700;

@@ -9,11 +9,17 @@ const gallery = document.querySelector('.gallery');
 const searchBox = document.querySelector('#search-form');
 const loadMoreBtn = document.querySelector('#load-more-btn');
 let imgToFind = '';
-export const imageLimitPerLoad = 40;
 let totalImagesPerReq = 0;
+let images = [];
+
+export const imageLimitPerLoad = 40;
 
 searchBox.addEventListener('submit', e => {
   e.preventDefault();
+
+  if (images.length > 0 && imgToFind !== searchBox.elements.searchQuery.value) {
+    clearGallery();
+  }
 
   imgToFind = searchBox.elements.searchQuery.value;
 
@@ -30,6 +36,8 @@ searchBox.addEventListener('submit', e => {
         createGallery(imgArr.hits);
         loadMoreBtn.classList.remove('is-hidden');
       }
+      images = document.querySelectorAll('a');
+      return imgToFind, images;
     })
     .catch(error);
 });
